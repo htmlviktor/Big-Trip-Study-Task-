@@ -16,17 +16,17 @@ const addMarkupElement = (container, markup, position = `beforeend`) => {
 };
 
 addMarkupElement(tripInfo, createTripInfoMain(), `afterbegin`);
-addMarkupElement(tripControls, createTripFilters());
-addMarkupElement(tripControls, createTripNavigation());
+addMarkupElement(tripControls, createTripFilters(), `afterbegin`);
+addMarkupElement(tripControls, createTripNavigation(), `afterbegin`);
 addMarkupElement(tripEvents, createTripSort());
-addMarkupElement(tripEvents, createEventFormEditing());
+//addMarkupElement(tripEvents, createEventFormEditing());
 addMarkupElement(tripEvents, createTripDaysList());
 
 const tripDaysList = document.querySelector(`.trip-days`);
 
-for (let i = 0; i < 3; i++) {
-  addMarkupElement(tripDaysList, createTripDayItem());
-}
+const tripEventsList = document.querySelector(`.trip-events__list`)
 
-const tripEventsList = document.querySelector(`.trip-events__list`);
+
+addMarkupElement(tripEventsList, createTripDayItem());
+
 addMarkupElement(tripEventsList, createDayItemEdit());
