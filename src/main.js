@@ -3,11 +3,10 @@ import {createTripNavigation} from './components/trip-nav.js';
 import {createTripFilters} from './components/trip-filters';
 import {createTripSort} from './components/trip-sort';
 import {createTripDaysList} from './components/trip-days-list';
-import {createTripDayItem} from './components/day-item';
-import {createDayItemEdit} from './components/day-item-edit.js';
-import {getItem} from './data.js';
-import {getFilters} from './data.js';
-import {getNavigation} from './data.js';
+import {getItem, getFilters, getNavigation} from './data.js';
+import {dayItem} from './components/day-item.js';
+import {dayEdit} from './components/day-item-edit.js';
+import {render, Position} from './utils.js';
 
 const tripInfo = document.querySelector(`.trip-info`);
 const tripControls = document.querySelector(`.trip-controls`);
@@ -27,6 +26,7 @@ const createItemsArray = (count) => {
   return itemsArray;
 };
 const allItems = createItemsArray(4);
+console.log(allItems)
 const getTripTowns = () => {
   const towns = [];
   for(let it of allItems) {
@@ -49,9 +49,31 @@ addMarkupElement(tripControls, createTripFilters(filters), `afterbegin`);
 addMarkupElement(tripControls, createTripNavigation(navigation), `afterbegin`);
 addMarkupElement(tripEvents, createTripSort());
 addMarkupElement(tripEvents, createTripDaysList());
-const tripEventsList = document.querySelector(`.trip-events__list`)
-for(let i = 0; i < 3; i++){
-  addMarkupElement(tripEventsList, createTripDayItem(allItems[i]));
-}
-addMarkupElement(tripEventsList, createDayItemEdit(allItems[3]));
 
+const renderDay = (dayMock) => {
+  const day = new dayItem(dayMock);
+  const editDay = new dayEdit(dayMock);
+  const tripEventsList = document.querySelector(`.trip-events__list`);
+  render(tripEventsList, day.getElement(), Position.BEFOREEND);
+
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      tripEventsList.replaceChild(day.getElement(), editDay.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
+
+  day.getElement()
+  .querySelector(`.event__rollup-btn`)
+  .addEventListener(`click`, () => {
+    tripEventsList.replaceChild(editDay.getElement(), day.getElement());
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
+  editDay.getElement()
+  .querySelector(`.event__rollup-btn`)
+  .addEventListener(`click`, () => {
+    tripEventsList.replaceChild(day.getElement(), editDay.getElement());
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
+}
+allItems.forEach((it) => renderDay(it));
