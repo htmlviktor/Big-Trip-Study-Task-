@@ -1,6 +1,7 @@
-import {createElement} from './../utils.js';
-export class dayEdit {
+import { AbstractComponent } from './abstract-component.js';
+export class dayEdit extends AbstractComponent {
   constructor({type, towns, price, description, dueDate, additionalOptions, photos}){
+    super();
     this._type = type;
     this._towns = towns;
     this._dueDate = dueDate;
@@ -8,13 +9,6 @@ export class dayEdit {
     this._description = description;
     this._additionalOptions = additionalOptions;
     this._photos = photos;
-    this._element = null;
-  }
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
   }
   getTemplate(){
     return `<li class="trip-events__item">

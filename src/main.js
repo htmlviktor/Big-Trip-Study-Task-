@@ -2,11 +2,9 @@ import {createTripInfoMain} from './components/trip-info-main.js';
 import {createTripNavigation} from './components/trip-nav.js';
 import {createTripFilters} from './components/trip-filters';
 import {createTripSort} from './components/trip-sort';
-import {createTripDaysList} from './components/trip-days-list';
 import {getItem, getFilters, getNavigation} from './data.js';
-import {dayItem} from './components/day-item.js';
-import {dayEdit} from './components/day-item-edit.js';
-import {render, Position} from './utils.js';
+
+import {TripController} from './controllers/trip-controller.js';
 
 const tripInfo = document.querySelector(`.trip-info`);
 const tripControls = document.querySelector(`.trip-controls`);
@@ -26,7 +24,6 @@ const createItemsArray = (count) => {
   return itemsArray;
 };
 const allItems = createItemsArray(4);
-console.log(allItems)
 const getTripTowns = () => {
   const towns = [];
   for(let it of allItems) {
@@ -34,6 +31,7 @@ const getTripTowns = () => {
   }
   return towns
 }
+
 const tripTowns = getTripTowns();
 
 const getPrice = () => {
@@ -48,32 +46,7 @@ addMarkupElement(tripInfo, createTripInfoMain(tripTowns, totalPrice), `afterbegi
 addMarkupElement(tripControls, createTripFilters(filters), `afterbegin`);
 addMarkupElement(tripControls, createTripNavigation(navigation), `afterbegin`);
 addMarkupElement(tripEvents, createTripSort());
-addMarkupElement(tripEvents, createTripDaysList());
+//addMarkupElement(tripEvents, createTripDaysList());
 
-const renderDay = (dayMock) => {
-  const day = new dayItem(dayMock);
-  const editDay = new dayEdit(dayMock);
-  const tripEventsList = document.querySelector(`.trip-events__list`);
-  render(tripEventsList, day.getElement(), Position.BEFOREEND);
-
-  const onEscKeyDown = (evt) => {
-    if (evt.key === `Escape` || evt.key === `Esc`) {
-      tripEventsList.replaceChild(day.getElement(), editDay.getElement());
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    }
-  };
-
-  day.getElement()
-  .querySelector(`.event__rollup-btn`)
-  .addEventListener(`click`, () => {
-    tripEventsList.replaceChild(editDay.getElement(), day.getElement());
-    document.addEventListener(`keydown`, onEscKeyDown);
-  });
-  editDay.getElement()
-  .querySelector(`.event__rollup-btn`)
-  .addEventListener(`click`, () => {
-    tripEventsList.replaceChild(day.getElement(), editDay.getElement());
-    document.addEventListener(`keydown`, onEscKeyDown);
-  });
-}
-allItems.forEach((it) => renderDay(it));
+const tripController = new TripController(tripEvents, allItems);
+tripController.init();
