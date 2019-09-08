@@ -23,7 +23,7 @@ const createItemsArray = (count) => {
   }
   return itemsArray;
 };
-const allItems = createItemsArray(4);
+const allItems = createItemsArray(15);
 const getTripTowns = () => {
   const towns = [];
   for(let it of allItems) {
@@ -46,7 +46,6 @@ addMarkupElement(tripInfo, createTripInfoMain(tripTowns, totalPrice), `afterbegi
 addMarkupElement(tripControls, createTripFilters(filters), `afterbegin`);
 addMarkupElement(tripControls, createTripNavigation(navigation), `afterbegin`);
 addMarkupElement(tripEvents, createTripSort());
-//addMarkupElement(tripEvents, createTripDaysList());
 
 const tripController = new TripController(tripEvents, allItems);
 tripController.init();
