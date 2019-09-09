@@ -1,9 +1,7 @@
 import {createTripInfoMain} from './components/trip-info-main.js';
 import {createTripNavigation} from './components/trip-nav.js';
 import {createTripFilters} from './components/trip-filters';
-import {createTripSort} from './components/trip-sort';
 import {getItem, getFilters, getNavigation} from './data.js';
-
 import {TripController} from './controllers/trip-controller.js';
 
 const tripInfo = document.querySelector(`.trip-info`);
@@ -45,7 +43,7 @@ const totalPrice = getPrice();
 addMarkupElement(tripInfo, createTripInfoMain(tripTowns, totalPrice), `afterbegin`);
 addMarkupElement(tripControls, createTripFilters(filters), `afterbegin`);
 addMarkupElement(tripControls, createTripNavigation(navigation), `afterbegin`);
-addMarkupElement(tripEvents, createTripSort());
+//addMarkupElement(tripEvents, createTripSort());
 
 const tripController = new TripController(tripEvents, allItems);
 tripController.init();

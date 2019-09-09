@@ -69,15 +69,15 @@ export const getItem = () => ({
 export const getFilters = () => ({
   filters: [
     {
-      title: `Everything`,
+      title: `everything`,
       isChecked: true,
     },
     {
-      title: `Future`,
+      title: `future`,
       isChecked: false,
     },
     {
-      title: `Past`,
+      title: `past`,
       isChecked: false,
     },
   ]
