@@ -1,18 +1,13 @@
-import {createElement} from './../utils.js';
-export class dayItem{
+import { AbstractComponent } from './abstract-component.js';
+
+export class dayItem extends AbstractComponent {
   constructor({type, towns, dueDate, price, additionalOptions}){
+    super();
     this._type = type;
     this._towns = towns;
     this._dueDate = dueDate;
     this._price = price;
     this._additionalOptions = additionalOptions;
-    this._element = null;
-  }
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
   }
   getTemplate() {
       return `<li class="trip-events__item">
@@ -26,7 +21,7 @@ export class dayItem{
             <p class="event__time">
               <time class="event__start-time" datetime="2019-03-18T10:30"> ${new Date(this._dueDate).getHours()} : ${new Date(this._dueDate).getMinutes()}</time>
               —
-              <time class="event__end-time" datetime="2019-03-18T11:00">${new Date(this._dueDate * 1.2).getHours()} : ${new Date(this._dueDate).getMinutes()}</time>
+              <time class="event__end-time" datetime="2019-03-18T11:00">${new Date(this._dueDate).getHours() + 2} : ${new Date(this._dueDate).getMinutes()}</time>
             </p>
             <p class="event__duration">1H 30M</p>
           </div>

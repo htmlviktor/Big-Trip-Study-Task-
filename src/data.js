@@ -45,39 +45,39 @@ export const getItem = () => ({
     500,
   ][Math.floor(Math.random() * 4)],
   additionalOptions: [{
-    title: `Add luggage`,
-    price: 10,
-    availability: true,
+      title: `Add luggage`,
+      price: 10,
+      availability: Boolean(Math.round(Math.random())),
     },
     {
       title: `Switch to comfort class`,
       price: 150,
-      availability: false,
+      availability: Boolean(Math.round(Math.random())),
     },
     {
       title: `Add meal`,
       price: 2,
-      availability: false,
+      availability: Boolean(Math.round(Math.random())),
     },
     {
       title: `Choose seats`,
       price: 9,
-      availability: true,
+      availability: Boolean(Math.round(Math.random())),
     }
   ]
 });
 export const getFilters = () => ({
   filters: [
     {
-      title: `Everything`,
+      title: `everything`,
       isChecked: true,
     },
     {
-      title: `Future`,
+      title: `future`,
       isChecked: false,
     },
     {
-      title: `Past`,
+      title: `past`,
       isChecked: false,
     },
   ]
@@ -94,4 +94,3 @@ export const getNavigation = () => ({
     },
   ]
 });
-
