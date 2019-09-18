@@ -1,6 +1,6 @@
 import { AbstractComponent } from './abstract-component.js';
 
-export class dayItem extends AbstractComponent {
+export class DayItem extends AbstractComponent {
   constructor({type, towns, dueDate, price, additionalOptions}){
     super();
     this._type = type;
