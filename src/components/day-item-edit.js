@@ -1,6 +1,6 @@
 import { AbstractComponent } from './abstract-component.js';
 const moment = require('moment');
-export class dayEdit extends AbstractComponent {
+export class DayEdit extends AbstractComponent {
   constructor({type, towns, price, description, dueDate, additionalOptions, photos}){
     super();
     this._type = type;
