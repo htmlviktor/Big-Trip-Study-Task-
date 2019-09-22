@@ -1,5 +1,5 @@
 import { AbstractComponent } from './abstract-component.js';
-
+const moment = require('moment');
 export class DayItem extends AbstractComponent {
   constructor({type, towns, dueDate, price, additionalOptions}){
     super();
@@ -19,9 +19,9 @@ export class DayItem extends AbstractComponent {
 
           <div class="event__schedule">
             <p class="event__time">
-              <time class="event__start-time" datetime="2019-03-18T10:30"> ${new Date(this._dueDate).getHours()} : ${new Date(this._dueDate).getMinutes()}</time>
+              <time class="event__start-time" datetime="2019-03-18T10:30"> ${moment(new Date(this._dueDate)).format('HH:mm')}</time>
               —
-              <time class="event__end-time" datetime="2019-03-18T11:00">${new Date(this._dueDate).getHours() + 2} : ${new Date(this._dueDate).getMinutes()}</time>
+              <time class="event__end-time" datetime="2019-03-18T11:00"> ${moment(new Date(this._dueDate - 7200)).format('HH:mm')}</time>
             </p>
             <p class="event__duration">1H 30M</p>
           </div>

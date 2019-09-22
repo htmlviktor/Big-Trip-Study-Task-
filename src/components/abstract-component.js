@@ -1,4 +1,4 @@
-import {createElement} from './../utils.js';
+import {createElement} from './../utils/utils.js';
 
 export class AbstractComponent {
   constructor(){
@@ -15,5 +15,8 @@ export class AbstractComponent {
   }
   getTemplate() {
     throw new Error(`Abstract method not implemented: getTemplate`);
+  }
+  removeElement() {
+    this._element = null;
   }
 }
